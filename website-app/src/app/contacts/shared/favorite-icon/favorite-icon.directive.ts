@@ -31,7 +31,8 @@ import { constants } from './favorite-icon.constants';
  */
 
 @Directive({
-  selector: '[appFavoriteIcon]'
+  selector: '[appFavoriteIcon]',
+  standalone: true
 })
 export class FavoriteIconDirective implements OnInit {
   private element: HTMLElement;
@@ -54,6 +55,7 @@ export class FavoriteIconDirective implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log("this.isFavorite: ", this.isFavorite)
     if (this.isFavorite) {
       this.setSolidColoredStar();
     } else {

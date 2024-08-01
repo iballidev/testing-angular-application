@@ -142,23 +142,25 @@ export class ContactService {
 
   public async put(contact: Contact): Promise<Contact | void> {
     const url: string = `${this.contactsUrl}/${contact.id}`;
-    const observable$ = this.http.put(
-      url,
-      JSON.stringify(contact),
-      this.httpOptions
-    );
-    try {
-      const data = await firstValueFrom(observable$);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-      catchError(this.handleError);
-    }
-    // return this.http
-    //   .put(url, JSON.stringify(contact), this.httpOptions)
-    //   .toPromise()
-    //   .then(() => contact)
-    //   .catch(this.handleError);
+    // const observable$ = this.http.put(
+    //   url,
+    //   JSON.stringify(contact),
+    //   this.httpOptions
+    // );
+    // try {
+    //   const data = await firstValueFrom(observable$);
+    //   console.log(data);
+    // } catch (error) {
+    //   console.error(error);
+    //   catchError(this.handleError);
+    // }
+
+    /** */
+    return this.http
+      .put(url, JSON.stringify(contact), this.httpOptions)
+      .toPromise()
+      .then(() => contact)
+      .catch(this.handleError);
 
     /** */
     // .pipe(

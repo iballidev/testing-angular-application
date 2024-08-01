@@ -32,10 +32,10 @@
   </h6>
 </div>
 
-<div class="buttons" *ngIf="!isLoading">
+<div class="buttons" *ngIf="!isLoading" style="display: flex; align-items: center; justify-content: space-between; margin-top: 2em;">
   <div>
     <a [routerLink]="['/contacts']">
-      <button mat-fab class="back-button">
+      <button mat-fab class="back-button" style="transform: rotate(180deg);">
         <mat-icon class="back-button-icon" matTooltip="Add new contact">forward</mat-icon>
       </button>
     </a>

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Contact, ContactService, ShowContactsDirective } from '../shared';
+import { Contact, ContactService, FavoriteIconDirective, ShowContactsDirective } from '../shared';
 import { constants } from './contact-list.constants';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ShowContactsDirective],
+  imports: [CommonModule, MaterialModule, ShowContactsDirective, FavoriteIconDirective],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
   providers:[ContactService]
