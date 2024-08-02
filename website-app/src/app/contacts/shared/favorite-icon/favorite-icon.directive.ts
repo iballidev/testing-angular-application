@@ -55,7 +55,7 @@ export class FavoriteIconDirective implements OnInit {
   }
 
   public ngOnInit(): void {
-    console.log("this.isFavorite: ", this.isFavorite)
+    // console.log("this.isFavorite: ", this.isFavorite)
     if (this.isFavorite) {
       this.setSolidColoredStar();
     } else {

@@ -98,7 +98,7 @@ export class ContactListComponent {
     this.isLoading = true;
 
     this.contactService.getContacts().subscribe((contacts: any) => {
-      console.warn('contacts: ', contacts);
+      // console.warn('contacts: ', contacts);
       this.isLoading = false;
       this.deletingContacts = false;
       this.contacts = contacts;

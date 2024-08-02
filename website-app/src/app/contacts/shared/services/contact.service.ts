@@ -19,7 +19,7 @@ export class ContactService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     }),
-    responseType: 'text',
+    // responseType: 'text',
   };
   // private headers: Headers = new Headers({
   //   "Content-Type": "application/json",
@@ -30,20 +30,19 @@ export class ContactService {
   constructor(private http: HttpClient) {}
 
   getHeroes() {
-    console.log('HELLO!!!');
     this.http
       .get<any>(this.contactsUrl)
       .pipe(catchError(this.handleError))
       .subscribe({
         next: (response: any) => {
-          console.log('response: ', response);
+          // console.log('response: ', response);
         },
       });
   }
 
   public getContacts(): Observable<any> {
     const observable$ = this.http.get(this.contactsUrl);
-    console.log('observable$: ', observable$);
+    // console.log('observable$: ', observable$);
     return observable$;
   }
 
@@ -70,7 +69,7 @@ export class ContactService {
     return this.post(contact);
   }
 
-  public new(contact: Contact): Promise<Contact | void> {
+  public new(contact: Contact): Observable<any> {
     return this.post(contact);
   }
 
@@ -95,20 +94,25 @@ export class ContactService {
     // // .catch(this.handleError);
   }
 
-  public async post(contact: Contact): Promise<Contact | void> {
+  public post(contact: Contact): Observable<any> {
     const url: string = `${this.contactsUrl}/${contact.id}`;
-    const observable$ = this.http.post(
-      url,
-      JSON.stringify(contact),
-      this.httpOptions
-    );
-    try {
-      const data = await firstValueFrom(observable$);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-      catchError(this.handleError);
-    }
+
+    return this.http
+      .post(url, contact, this.httpOptions)
+      .pipe(catchError(this.handleError));
+
+    // const observable$ = this.http.post(
+    //   url,
+    //   JSON.stringify(contact),
+    //   this.httpOptions
+    // );
+    // try {
+    //   const data = await firstValueFrom(observable$);
+    //   console.log(data);
+    // } catch (error) {
+    //   console.error(error);
+    //   catchError(this.handleError);
+    // }
 
     // return (
     //   this.http

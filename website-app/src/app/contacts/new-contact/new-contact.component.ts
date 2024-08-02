@@ -55,11 +55,16 @@ export class NewContactComponent implements OnInit {
 
     this.savingContact = true;
 
-    this.contactService.put(contact).subscribe((response: any) => {
-      if (response) {
-        this.savingContact = false;
-        this.router.navigate(['/']);
-      }
+    this.contactService.put(contact).subscribe({
+      next: (response: any) => {
+        if (response) {
+          this.savingContact = false;
+          this.router.navigate(['/']);
+        }
+      },
+      error: (err: any) => {
+        console.log('Error: ', err);
+      },
     });
   }
 
