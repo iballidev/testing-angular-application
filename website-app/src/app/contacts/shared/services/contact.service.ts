@@ -3,7 +3,14 @@ import { Injectable } from '@angular/core';
 
 import { Contact } from '../';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, firstValueFrom, map, Observable, Subject } from 'rxjs';
+import {
+  catchError,
+  firstValueFrom,
+  map,
+  Observable,
+  Subject,
+  tap,
+} from 'rxjs';
 
 @Injectable()
 export class ContactService {
@@ -18,56 +25,26 @@ export class ContactService {
   //   "Content-Type": "application/json",
   // });
 
-  
   contactDetailsObs = new Subject<any>();
 
   constructor(private http: HttpClient) {}
 
   getHeroes() {
     console.log('HELLO!!!');
-    this.http.get<any>(this.contactsUrl).subscribe({
-      next: (response: any) => {
-        console.log('response: ', response);
-      },
-      error: (err: any) => {
-        console.log('Error***: ', err);
-      },
-    });
+    this.http
+      .get<any>(this.contactsUrl)
+      .pipe(catchError(this.handleError))
+      .subscribe({
+        next: (response: any) => {
+          console.log('response: ', response);
+        },
+      });
   }
-
-  // public async getContacts(): Promise<Observable<any>> {
-  //   const observable$ = this.http.get(this.contactsUrl);
-  //   console.log('observable$: ', observable$);
-  //   return this.http.get(this.contactsUrl).pipe(
-  //     map((response: any) => response as Contact),
-  //     catchError(this.handleError)
-  //   );
-  // }
 
   public getContacts(): Observable<any> {
     const observable$ = this.http.get(this.contactsUrl);
     console.log('observable$: ', observable$);
     return observable$;
-
-    // try {
-    //   const data: any = await firstValueFrom(observable$).then((data: any) =>
-    //     console.log(data)
-    //   );
-    //   console.log(data);
-    //   return data ;
-    // } catch (error) {
-    //   console.error('Error: ', error);
-    //   catchError(this.handleError);
-    // }
-    /** */
-    // return this.http.get(this.contactsUrl).pipe(
-    //   map((response: any) => response as Contact),
-    //   catchError(this.handleError)
-    // );
-    /** */
-    // .toPromise()
-    // .then((response: any) => response.json().data as Contact)
-    // .catch(this.handleError);
   }
 
   public getContact(id: number) {
@@ -76,14 +53,20 @@ export class ContactService {
       this.contactDetailsObs.next(contact);
     });
 
-    this.contactDetailsObs.subscribe((data)=>console.warn("data: ", data))
+    this.contactDetailsObs.subscribe((data) => console.warn('data: ', data));
   }
 
-  public save(contact: Contact): Promise<Contact | void> {
+  public save(contact: Contact) {
+    console.log('contact: ', contact);
     if (contact.id) {
-      return this.put(contact);
+      return this.put(contact).subscribe({
+        next: (response: any) => {
+          if (response) {
+            console.log('response: ', response);
+          }
+        },
+      });
     }
-
     return this.post(contact);
   }
 
@@ -140,33 +123,12 @@ export class ContactService {
     // );
   }
 
-  public async put(contact: Contact): Promise<Contact | void> {
+  put(contact: Contact): Observable<any> {
+    console.log('contact##: ', contact);
     const url: string = `${this.contactsUrl}/${contact.id}`;
-    // const observable$ = this.http.put(
-    //   url,
-    //   JSON.stringify(contact),
-    //   this.httpOptions
-    // );
-    // try {
-    //   const data = await firstValueFrom(observable$);
-    //   console.log(data);
-    // } catch (error) {
-    //   console.error(error);
-    //   catchError(this.handleError);
-    // }
-
-    /** */
     return this.http
-      .put(url, JSON.stringify(contact), this.httpOptions)
-      .toPromise()
-      .then(() => contact)
-      .catch(this.handleError);
-
-    /** */
-    // .pipe(
-    //   map((response: any) => response.json().data as Contact),
-    //   catchError(this.handleError)
-    // )
+      .put(url, contact, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: any): Promise<any> {
