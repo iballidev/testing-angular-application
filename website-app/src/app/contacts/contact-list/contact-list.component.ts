@@ -1,7 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Contact, ContactService, FavoriteIconDirective, ShowContactsDirective } from '../shared';
+import {
+  Contact,
+  ContactService,
+  FavoriteIconDirective,
+  ShowContactsDirective,
+} from '../shared';
 import { constants } from './contact-list.constants';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { MaterialModule } from '../../material/material.module';
 import { CONTACTS } from '../shared/data/mock-contacts';
@@ -11,10 +16,16 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ShowContactsDirective, FavoriteIconDirective],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MaterialModule,
+    ShowContactsDirective,
+    FavoriteIconDirective,
+  ],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',
-  providers:[ContactService]
+  providers: [ContactService],
 })
 export class ContactListComponent {
   // @Input('contacts') contacts!: Contact[];
@@ -61,7 +72,7 @@ export class ContactListComponent {
     this.displayDeleteSnackBar(contact);
 
     this.contactService.delete(contact).then(() => {
-      this.contacts = this.contacts.filter((c:any) => c !== contact);
+      this.contacts = this.contacts.filter((c: any) => c !== contact);
 
       if (this.selectedContact === contact) {
         this.selectedContact = null;
@@ -74,7 +85,7 @@ export class ContactListComponent {
   public deleteContacts(): void {
     this.deletingContacts = true;
 
-    this.contacts.forEach((contact:any, index:number) => {
+    this.contacts.forEach((contact: any, index: number) => {
       this.contactService.delete(contact);
 
       if (index === this.contacts.length - 1) {
@@ -87,7 +98,7 @@ export class ContactListComponent {
     this.isLoading = true;
 
     this.contactService.getContacts().subscribe((contacts: any) => {
-      console.warn("contacts: ", contacts)
+      console.warn('contacts: ', contacts);
       this.isLoading = false;
       this.deletingContacts = false;
       this.contacts = contacts;

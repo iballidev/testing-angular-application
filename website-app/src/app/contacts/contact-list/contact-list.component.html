@@ -54,7 +54,7 @@
       <button mat-raised-button color="primary" (click)="deleteContacts()">
         Delete All Contacts
       </button>
-      <a *ngIf="!isLoading && !deletingContact" routerLink="/add">
+      <a *ngIf="!isLoading && !deletingContact" [routerLink]="['/add']">
         <button mat-fab class="add-fab" id="add-contact">
           <mat-icon class="add-fab-icon" matTooltip="Add new contact">add</mat-icon>
         </button>
