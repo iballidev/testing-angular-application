@@ -3,6 +3,7 @@ import {
   Contact,
   ContactService,
   FavoriteIconDirective,
+  PhoneNumberPipe,
   ShowContactsDirective,
 } from '../shared';
 import { constants } from './contact-list.constants';
@@ -22,6 +23,7 @@ import { Observable } from 'rxjs';
     MaterialModule,
     ShowContactsDirective,
     FavoriteIconDirective,
+    PhoneNumberPipe
   ],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss',

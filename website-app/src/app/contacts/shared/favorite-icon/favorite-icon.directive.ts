@@ -40,7 +40,8 @@ export class FavoriteIconDirective implements OnInit {
   private _primaryColor = 'gold';
   private _starClasses: any = constants.classes;
 
-  @Input('appFavoriteIcon') isFavorite!: boolean;
+  // @Input('appFavoriteIcon') isFavorite!: boolean;
+  @Input('appFavoriteIcon') isFavorite: any;
 
   @Input() set color(primaryColorName: string) {
     if (primaryColorName) {

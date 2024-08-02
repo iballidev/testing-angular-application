@@ -27,7 +27,7 @@
               {{ contact.email }}
             </td>
             <td class="mdl-data-table__cell--non-numeric" (click)="onClick(contact)">
-              <!-- {{ contact.number | phoneNumber : "default" : contact.country : true }} -->
+              {{ contact.number | phoneNumber : "default" : contact.country : true }}
             </td>
             <td>
               <mat-icon class="edit-icon" (click)="editContact(contact)" matTooltip="Edit">
