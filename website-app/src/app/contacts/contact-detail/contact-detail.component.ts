@@ -37,7 +37,7 @@ export class ContactDetailComponent implements OnInit {
       const id = +params['id'];
       this.contactService.getContact(id);
       this.contactService.contactDetailsObs.subscribe((contact: any) => {
-        console.log('contact: ', contact);
+        // console.log('contact: ', contact);
         this.isLoading = false;
         this.contact = contact;
       });

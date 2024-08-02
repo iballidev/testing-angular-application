@@ -52,7 +52,7 @@ export class ContactService {
       this.contactDetailsObs.next(contact);
     });
 
-    this.contactDetailsObs.subscribe((data) => console.warn('data: ', data));
+    // this.contactDetailsObs.subscribe((data) => console.warn('data: ', data));
   }
 
   public save(contact: Contact) {
