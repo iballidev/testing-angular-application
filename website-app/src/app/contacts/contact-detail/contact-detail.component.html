@@ -7,43 +7,45 @@
   <mat-progress-bar class="app-progress" mode="indeterminate" aria-label="Indeterminate progress-bar example"></mat-progress-bar>
 </div>
 
-<div *ngIf="!isLoading && contact !== null">
-  <mat-card>
-    <mat-card-content>
-      <mat-card-title-group>
-        <mat-icon>mood</mat-icon>
-        <mat-card-title>
-          {{ contact.name }}
-        </mat-card-title>
-        <mat-card-subtitle>
-          {{ contact.email }}
-        </mat-card-subtitle>
-        <mat-card-subtitle>
-          {{ contact.number | phoneNumber : "default" : contact.country }}
-        </mat-card-subtitle>
-      </mat-card-title-group>
-    </mat-card-content>
-  </mat-card>
-</div>
-
-<div *ngIf="!isLoading && contact === null">
-  <h6 class="messages">
-    {{ noContactFoundMessage }}
-  </h6>
-</div>
-
-<div class="buttons" *ngIf="!isLoading" style="display: flex; align-items: center; justify-content: space-between; margin-top: 2em;">
-  <div>
-    <a [routerLink]="['/contacts']">
-      <button mat-fab class="back-button" style="transform: rotate(180deg);">
-        <mat-icon class="back-button-icon" matTooltip="Add new contact">forward</mat-icon>
-      </button>
-    </a>
+<div style="max-width: 600px; margin: 0 auto;">
+  <div *ngIf="!isLoading && contact !== null">
+    <mat-card>
+      <mat-card-content>
+        <mat-card-title-group>
+          <mat-icon>mood</mat-icon>
+          <mat-card-title>
+            {{ contact.name }}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{ contact.email }}
+          </mat-card-subtitle>
+          <mat-card-subtitle>
+            {{ contact.number | phoneNumber : "default" : contact.country }}
+          </mat-card-subtitle>
+        </mat-card-title-group>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <div>
-    <button mat-fab class="feed-button" color="primary" (click)="openDialog(contact)">
-      <mat-icon class="feed-button-icon">rss_feed</mat-icon>
-    </button>
+  <div *ngIf="!isLoading && contact === null">
+    <h6 class="messages">
+      {{ noContactFoundMessage }}
+    </h6>
+  </div>
+
+  <div class="buttons" *ngIf="!isLoading" style="display: flex; align-items: center; justify-content: space-between; margin-top: 2em;">
+    <div>
+      <a [routerLink]="['/contacts']">
+        <button mat-fab class="back-button" style="transform: rotate(180deg);">
+          <mat-icon class="back-button-icon" matTooltip="Add new contact">forward</mat-icon>
+        </button>
+      </a>
+    </div>
+
+    <div>
+      <button mat-fab class="feed-button" color="primary" (click)="openDialog(contact)">
+        <mat-icon class="feed-button-icon">rss_feed</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

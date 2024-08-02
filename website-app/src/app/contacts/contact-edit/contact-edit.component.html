@@ -1,6 +1,6 @@
 <!-- <p>contact-edit works!</p> -->
 
-<div>
+<div style="max-width: 600px; margin: 0 auto;">
   <div *ngIf="isLoading">
     <h6 class="messages">
       {{ loadingContactMessage }}
@@ -10,39 +10,41 @@
 
   <div *ngIf="!isLoading && contact !== null">
     <mat-card>
-      <mat-card-title-group>
-        <mat-icon>mood</mat-icon>
-        <mat-card-title>
-          <i [appFavoriteIcon]="contact.favorite" [color]="'gold'" [matTooltip]="contact.favorite ? 'Starred' : 'Not Starred'" (click)="saveContact(contact)"></i>
-          <mat-form-field>
-            <input matInput placeholder="Name" [(ngModel)]="contact.name" class="contact-name" />
-          </mat-form-field>
-        </mat-card-title>
-        <mat-card-subtitle class="left-padding">
-          <mat-form-field>
-            <input matInput placeholder="Email" [(ngModel)]="contact.email" />
-          </mat-form-field>
-        </mat-card-subtitle>
-        <mat-card-subtitle class="left-padding">
-          <mat-form-field>
-            <input matInput placeholder="Phone Number" [(ngModel)]="contact.number" />
-          </mat-form-field>
-        </mat-card-subtitle>
-        <mat-card-subtitle class="left-padding">
-          <mat-form-field>
-            <mat-select placeholder="Country code" [(ngModel)]="contact.country">
-              <mat-option *ngFor="let countryDialingCode of countryDialingCodes" [value]="countryDialingCode">
-                {{ countryDialingCode }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card-subtitle>
-      </mat-card-title-group>
-      <div class="update-contact-button">
-        <button (click)="updateContact(contact)" mat-raised-button color="primary">
-          Update Contact
-        </button>
-      </div>
+      <mat-card-content>
+        <mat-card-title-group>
+          <mat-icon>mood</mat-icon>
+          <mat-card-title>
+            <i [appFavoriteIcon]="contact.favorite" [color]="'gold'" [matTooltip]="contact.favorite ? 'Starred' : 'Not Starred'" (click)="saveContact(contact)"></i>
+            <mat-form-field>
+              <input matInput placeholder="Name" [(ngModel)]="contact.name" class="contact-name" />
+            </mat-form-field>
+          </mat-card-title>
+          <mat-card-subtitle class="left-padding">
+            <mat-form-field>
+              <input matInput placeholder="Email" [(ngModel)]="contact.email" />
+            </mat-form-field>
+          </mat-card-subtitle>
+          <mat-card-subtitle class="left-padding">
+            <mat-form-field>
+              <input matInput placeholder="Phone Number" [(ngModel)]="contact.number" />
+            </mat-form-field>
+          </mat-card-subtitle>
+          <mat-card-subtitle class="left-padding">
+            <mat-form-field>
+              <mat-select placeholder="Country code" [(ngModel)]="contact.country">
+                <mat-option *ngFor="let countryDialingCode of countryDialingCodes" [value]="countryDialingCode">
+                  {{ countryDialingCode }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-subtitle>
+        </mat-card-title-group>
+        <div class="update-contact-button">
+          <button (click)="updateContact(contact)" mat-raised-button color="primary">
+            Update Contact
+          </button>
+        </div>
+      </mat-card-content>
     </mat-card>
   </div>
 
