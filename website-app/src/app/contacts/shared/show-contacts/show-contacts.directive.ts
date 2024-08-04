@@ -1,4 +1,10 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  Inject,
+  Input,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 
 /**
  * ShowContactsDirective
@@ -18,13 +24,16 @@ import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
   selector: '[appShowContacts]',
-  standalone: true
+  standalone: true,
 })
 export class ShowContactsDirective {
   private templateRef: TemplateRef<any>;
   private viewContainer: ViewContainerRef;
 
-  constructor(templateRef: TemplateRef<any>, viewContainer: ViewContainerRef) {
+  constructor(
+    @Inject(TemplateRef) templateRef: TemplateRef<any>,
+    @Inject(ViewContainerRef) viewContainer: ViewContainerRef
+  ) {
     this.templateRef = templateRef;
     this.viewContainer = viewContainer;
   }

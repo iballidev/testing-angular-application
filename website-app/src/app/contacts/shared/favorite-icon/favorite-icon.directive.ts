@@ -1,4 +1,12 @@
-import { Directive, ElementRef, Input, HostListener, OnInit, Renderer2 } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  HostListener,
+  OnInit,
+  Renderer2,
+  Inject,
+} from '@angular/core';
 
 import { constants } from './favorite-icon.constants';
 
@@ -32,7 +40,7 @@ import { constants } from './favorite-icon.constants';
 
 @Directive({
   selector: '[appFavoriteIcon]',
-  standalone: true
+  standalone: true,
 })
 export class FavoriteIconDirective implements OnInit {
   private element: HTMLElement;
@@ -50,7 +58,10 @@ export class FavoriteIconDirective implements OnInit {
     }
   }
 
-  constructor(element: ElementRef, Renderer2: Renderer2) {
+  constructor(
+    @Inject(ElementRef) element: ElementRef,
+    @Inject(Renderer2) Renderer2: Renderer2
+  ) {
     this.element = element.nativeElement;
     this.Renderer2 = Renderer2;
   }
@@ -115,7 +126,7 @@ export class FavoriteIconDirective implements OnInit {
     this.Renderer2.setStyle(this.element, 'color', color);
   }
 
-  private getStarClasses(starType:string): string {
+  private getStarClasses(starType: string): string {
     let classNames = '';
 
     switch (starType) {
