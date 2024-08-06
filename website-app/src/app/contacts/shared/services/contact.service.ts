@@ -56,7 +56,7 @@ export class ContactService {
   }
 
   public save(contact: Contact) {
-    console.log('contact: ', contact);
+    console.log('saved contact: ', contact);
     if (contact.id) {
       return this.put(contact).subscribe({
         next: (response: any) => {

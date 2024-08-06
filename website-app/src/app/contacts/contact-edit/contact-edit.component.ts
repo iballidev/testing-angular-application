@@ -57,10 +57,10 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   }
 
   public saveContact(contact: Contact) {
-    // contact.favorite = !contact.favorite;
-    contact.favorite
-      ? (contact.favorite = !contact?.favorite)
-      : (contact.favorite = true);
+    contact.favorite = !contact.favorite;
+    // contact && contact.favorite
+    //   ? (contact.favorite = !contact?.favorite)
+    //   : (contact.favorite = true);
     this.contactService.save(contact);
   }
 
