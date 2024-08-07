@@ -23,7 +23,7 @@ describe('Directive: FavoriteIconDirective', () => {
     const testModuleMetadata: TestModuleMetadata = {
       declarations: [
         // FavoriteIconDirective,
-         TestComponent
+        //  TestComponent
     ]
     };
     fixture = TestBed.configureTestingModule(testModuleMetadata)

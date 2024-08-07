@@ -9,6 +9,7 @@
   </div>
 
   <!-- <div class="contact-name" style="color: red; font-weight: 600;">Alli</div> -->
+  <div style="color: red; font-weight: 600;">{{contact | json}}</div>
 
   <div *ngIf="!isLoading && contact !== null">
     <mat-card>
